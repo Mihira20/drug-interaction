@@ -1,3 +1,6 @@
 jupyterlab>3.0
 pandas
 scikit-learn
+transformers
+torch
+datasets
