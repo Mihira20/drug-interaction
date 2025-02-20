@@ -48,6 +48,7 @@ potentially aiding researchers and healthcare professionals in quickly accessing
   This structured format provides a clean, consistent basis for further analysis and model training, with each row representing a 
   unique drug-target interaction described in a standardized text format.
 
+  
   B) Retrieval Component:
   The Retrieval Component in this drug interaction RAG system uses TF-IDF (Term Frequency-Inverse Document Frequency) 
   vectorization to create an efficient searchable index of drug interactions. 
@@ -66,6 +67,7 @@ potentially aiding researchers and healthcare professionals in quickly accessing
   to all document vectors in the dataset. It's particularly effective for finding relevant drug interactions based on textual similarity, 
   making it a crucial component of the RAG system's ability to provide accurate and context-relevant responses to user queries.
 
+  
   C) BERT Model Fine-tuning:
   The BERT model fine-tuning step is a crucial part of this drug interaction RAG system. 
   It enhances the system's ability to understand and classify drug interaction types based on the processed data.
@@ -87,6 +89,50 @@ potentially aiding researchers and healthcare professionals in quickly accessing
   This fine-tuned BERT model can then classify new drug interaction descriptions into appropriate action types, 
   providing a deeper understanding of the interaction contexts. This capability is integrated into the RAG system to 
   generate more accurate and context-aware responses to user queries about drug interactions.
+
+  
+  D) RAG Pipeline:
+  The RAG (Retrieval-Augmented Generation) pipeline is the core of this drug interaction information system. 
+  It combines two key components: the retrieval mechanism and the fine-tuned BERT model for generation.
+
+  The pipeline works as follows:
+
+  Retrieval: When a user submits a query, the system first uses TF-IDF vectorization to find relevant passages from the drug interaction dataset. The 
+  'retrieve_relevant_passages' function transforms the query into a TF-IDF vector and uses cosine similarity to identify the top 5 most relevant passages.
+
+  Generation: The 'generate_response' function then takes these relevant passages along with the original query and combines them into a single input for the BERT model. 
+  This combined input is tokenized and passed through the fine-tuned BERT model, which predicts the most likely action type for the drug interaction.
+
+  Response Construction: The system constructs a detailed response that includes the predicted action type and the relevant passages retrieved. 
+  This provides context and supporting information for the prediction.
+
+  User Interface: The 'process_user_query' function creates an interactive interface where users can input queries and receive responses until they choose to quit.
+
+  This RAG approach allows the system to leverage both the broad knowledge captured in the BERT model and the specific information in the drug interaction dataset, 
+  providing informative and context-aware responses to user queries about drug interactions.
+
+
+  E) Interactive Query Interface:
+  The interactive query interface is the user-facing component of the drug interaction RAG system. 
+  It provides a command-line interface where users can directly interact with the system to get 
+  information about drug interactions. 
+  
+  Here's how it works:
+
+  The interface is implemented in the process_user_query() function, which runs in a loop until the user decides to quit.
+
+  When started, the system displays a welcome message and instructions for use.
+
+  Users can type in natural language queries about drug interactions. For example, they might ask "What is the interaction between aspirin and warfarin?"
+
+  The system processes each query through the RAG pipeline, which retrieves relevant passages and generates a response using the fine-tuned BERT model.
+
+  The response, including the predicted action type and relevant passages, is then displayed to the user.
+
+  This process continues, allowing users to ask multiple questions in a session, until they type 'quit' to exit.
+
+  This interface makes the complex backend of the RAG system accessible to users who may not have technical expertise, 
+  allowing them to quickly obtain information about drug interactions in a conversational manner.
   
 
 
